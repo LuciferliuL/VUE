@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div id="app">
+      
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+       new Vue({
+        el: "#app",
+        data: {
+          msg: 'hello'
+        },
+        beforeCreate:function(){
+          console.log('beforeCreate',this.msg)
+        },
+        created:function(){
+          console.log('created',this.msg)
+        },
+        beforeMount:function(){
+          console.log('beforeMount',this.msg)
+        },
+        mounted:function(){
+          console.log('mounted',this.msg)
+        }
+       })
+    </script>
+    </body>
+</html>

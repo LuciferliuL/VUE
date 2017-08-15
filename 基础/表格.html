@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+          *{
+            margin: 0;
+            padding: 0;
+          }
+          table{
+            border-collapse: collapse;
+            width: 800px;
+          }
+          th{
+            background: #0094ff;
+            border:1px solid black;
+            font: 16px;
+            padding: 5px;
+          }
+          td{
+            text-align: center;
+            padding: 5px;
+            border:1px solid black;
+          }
+        </style>
+    </head>
+    <body>
+    <div id="app">
+      <input type="text" v-model='id' >
+      <input type="text" v-model='pname'>
+      <!-- 当keydown只有在按了enter以后才会触发 -->
+      <!-- <input type="text" v-model='addlink' v-on:keydown.enter = 'addDate'> -->
+      <!-- <input type="button" @click='addDate' value="按钮"> -->
+      <table>
+        <tr>
+          <th>编号</th>
+          <th>名称</th>
+          <!-- <th>种子</th> -->
+          <th>时间</th>
+          <th>删除</th>
+        </tr>
+        <!-- <tr v-show='list.length == 0'> -->
+          <!-- <td colspan='5'>没有数据</td> -->
+        <!-- </tr> -->
+        <tr v-for='item in list'>
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <!-- <td>{{item.link}}</td> -->
+          <td>{{item.ctime}}</td>
+          <td>
+            <a href="javascript:void(0)" v-on:click = 'delData(item.id)'>删除</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <script src="vue221.js"></script>
+    <script src="vue-resource121.js"></script>
+    <script>
+     //设定新的自定义按键，113是f2在键盘上的code码 V2.0
+    // Vue.config.keyCodes.f2 =113;
+      // V1.0的directive自定义指令
+    //自定义一个指令 V1.0
+    // Vue.directive('focus' ,function(){
+    //   // var inputObj = this.el;
+    //   // inputObj.focus();
+    //   //focus兼容性处理
+    //   setTimeout(function(){
+    //     var inputObj = this.el;
+    //     inputObj.focus();
+    //   },0)
+    // })
+    //自定义一个v-color指令
+    // Vue.directive('color' , function(){
+    //   this.el.style.color = this.vm[this.expression];
+    // })
+    
+   
+    //V2.0  自定义指令
+    // Vue.directive('color' ,{
+    //   //参数一：获取color所在的标签 ， 参数二：bind方法，存储了color里面的东西
+    //   bind : function(el ,binding){
+    //     console.log(el)
+    //       el.style.color = binding.expression;
+    //   }
+    // })
+       var vm = new Vue({
+        el : '#app',
+        data : {
+          // colorA : 'red',
+          list : [
+           // {id : 1 , name : '波多野结衣' , link : 'EKN1312Onek124Oen' , ctime : new Date()},
+           // {id : 2 , name : '小泽玛利亚' , link : 'OENEKom1Ado20Oadm' , ctime : new Date()},
+           // {id : 3 , name : '松岛枫' , link : 'EON192jeoSDNO22P' , ctime : new Date()}
+          ],
+          id : 0 ,
+          pname : '',
+          // addlink : ''
+          //Vue对象实例创建完毕后会自动调用created创建的方法
+         
+        },
+         created:function(){
+            this.getlist();
+          },
+        methods : {
+          // addDate : function(){
+          //   var data = {id : this.id , name : this.pname , link : this.addlink , ctime : new Date()};
+          //   this.list.push(data);
+          //   this.id = 0 ;
+          //   this.pname = '';
+          //   this.addlink = '';
+          // },
+          // delData : function(id){
+          //   var i = this.list.findIndex(function(item){
+          //     return item.id == id;
+          //   });
+          //   this.list.splice(i , 1);
+          // },
+          getlist:function(){
+            //请求服务器的api获取数据
+            // this.$http.get('http://www.lovegf.cn:8899/api/getprodlist')
+            // http://www.lovegf.cn:8899/api/getprodlist
+            this.$http.get('http://www.lovegf.cn:8899/api/getprodlist')
+            .then(function(response){
+              this.list = response.body.message;
+              // console.log(response.body.message);
+            })
+          }
+        },
+        // filters: {
+        //   datefmt : function(input , formatstring){
+        //     var result = '';
+        //     var year = input.getFullYear();
+        //     var month = input.getMonth();
+        //     var day = input.getDate();
+        //     if (formatstring == 'yyyy-mm-dd') {
+        //       result = year + '-' + month + '-' + day;
+        //     }else{
+        //       result = year + '-' + month + '-' + day + ' 03:33';
+        //     };
+        //     return result
+        //   }
+        // }
+       });
+   
+    </script>
+    </body>
+</html>

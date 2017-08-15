@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div id="app">
+      {{time | dateFmt}}
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+    //参数一：filter名称，参数二： 回调函数
+    Vue.filter('dataFmt' ,function(input) {
+      return input.getFullYear() + '-' + (input.getMonth() + 1) + '-' + input.getDate();
+    });
+        var vm = new Vue({
+          el: '#app',
+          data: {
+            time: new Date()
+          },
+          //写在Vue内部的是私有过滤器是filters，是一个对象
+          filters: {
+            //input获取的是|左边传入的参数
+            dateFmt:function(input){
+              var result = '';
+              var year = input.getFullYear();
+              var month = input.getMonth() + 1;
+              var day = input.getDate();
+              result = year + '-' + month + '-' + day;
+              return result;
+            }
+          }
+        })
+    </script>
+    </body>
+</html>

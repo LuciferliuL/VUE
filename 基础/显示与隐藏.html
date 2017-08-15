@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="vue221.js"></script>
+        <style type="text/css">
+          .show-enter-active,.show-leave-active{
+            transition:all 1s ease;
+          }
+          .show-enter,.show-leave-to{
+            padding-left: 100px;
+          }
+          .show-enter-to,.show-leave{
+            padding-left:10px
+          }
+        </style>
+    </head>
+    <body>
+      <div id="app">
+        <button @click='toggle'>按 钮</button>
+        <transition name='show'>
+          <span v-show='isshow'>{{msg}}</span>
+        </transition>
+        
+      </div>
+    </body>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          msg: 'hello',
+          isshow: false
+        },
+        methods: {
+           toggle: function(){
+              this.isshow = !this.isshow;
+           }
+        }
+      })
+    </script>
+</html>

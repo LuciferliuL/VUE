@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        *{
+          margin: 0;
+          padding: 0;
+        }
+          table{
+            margin: 0 auto;
+            padding-top: 50px;
+            width: 800px;
+
+          }
+            tr th {
+              border:1px solid black;
+              background:#0094ff;
+              color: white;
+              font: 16px;
+              text-align: center;
+              padding: 5px;
+            }
+            tr td{
+              border:1px solid black;
+              text-align: center;
+              padding: 5px;
+            }
+            input{
+              margin: 10px;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="app">
+      <input type="text" v-model='pname'>
+      <input type="button" value="按钮" @click = 'addData'>
+    <table>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+      <tr v-if="list.length == 0">
+        <td>没有数据</td>
+      </tr>
+      <!-- 遍历list，给item赋值 然后添加到td里面 -->
+      <tr v-for='item in list"'>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.ctime}}</td>
+        <td>
+        <!-- 添加点击时间，执行函数，删除对应的id条目 -->
+          <a href="javascript:void(0)" @click='del(item)'>删除</a>
+        </td>
+      </tr>
+    </table>
+     </div>
+    <script src="vue1026.js"></script>
+    <script src="vue-resource121.js"></script>
+    <script>
+       var vm = new Vue({
+        el : '#app',
+        data : {
+          list : [// {id : 1 , name : '奔驰' , ctime : new Date}
+          ],
+          pname : ''
+        },
+        created: function(){
+           this.getlist();
+        },
+        methods : {
+          addData : function(){
+            //组装成和list一样的格式，然后添加到list里面去 通过item in list 来遍历添加
+            var p = {name : this.pname};
+            var url = 'http://www.lovegf.cn:8899/api/addproduct';
+            var options = {emulateJSON:true};
+            this.$http.post(url , p , options).then(function(response){
+              console.log(response.body.message);
+              this.getlist;
+            })
+          },
+          del : function(item){
+            //findIndex(回调函数)----遍历每一个值，直到有一个符合回调函数内的要求就返回它
+            var i = this.list.findIndex(function(item){if(item==this.id){return item}});
+            //给这个数组删除该id的那一条数据即可
+            this.list.splice(i , 1);
+          },
+          getlist:function(){
+            var URL = "http://www.lovegf.cn:8899/api/getproduct"
+            this.$http.get(URL).then(function(response){
+              if (response.body.status != 0) {
+                alert(response.body.message);
+                return
+              };
+              this.list = response.body.message;
+            })
+          }
+
+        }
+       })
+    </script>
+    </body>
+</html>

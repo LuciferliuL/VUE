@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="getdom">点击</button>
+        <div ref="mydiv">效果</div>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            methods:{
+                getdom:function(){
+                    console.log(this.$refs.mydiv.innerHTML)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
