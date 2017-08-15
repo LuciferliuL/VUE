@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--//使用：绑定props中定义的值传递给子组件-->
+        <suba :id='ids'></suba>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                ids: 100
+            },
+            components: {
+                'suba': {
+                    template: '<div>{{id}}</div>',
+                    props: ['id']//接收传值
+                }
+            }
+        })
+    </script>
+</body>
+</html>

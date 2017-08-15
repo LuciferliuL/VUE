@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+        <!--这中写法就不可以会报错未找到#con
+        <template id="#con">
+            <div>
+                <input type="text" v-model="ids">
+                <coo :msg="ids">{{msg}}</coo>
+            </div>
+        </template>-->
+    
+    <div id="app">
+        <con></con>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+        Vue.component('con',{
+            template:'<div><input type="text" v-model="ids"/><coo :msg="ids"></coo></div>',
+            // template:'#con',
+            data:function(){
+                return {ids:'mm'}
+            },
+            components:{
+                'coo':{
+                    props:['msg'],
+                    template:'<div>{{msg}}</div>'
+                }
+            }
+        })
+        new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <!-- 创建实例子组件 -->
+    <template id="con">
+      <button @click='send'>发送</button>
+    </template>
+
+
+    <div id="app">
+      <!-- 使用子组件 添加方法接受传递的值-->
+      <con v-on:send='getdata'></con>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+       new Vue({
+        el:'#app',
+        methods: {
+          //创建父组件接受参数后执行的回调
+          getdata: function(input){
+            alert(input)
+          }
+        },
+        //创建子组件
+        components: {
+          //子组件名称
+          'con': {
+            //子组件模块
+            template: '#con',
+            //子组件方法
+            methods: {
+              send: function(){
+                //需要发送的  值名称，值
+              this.$emit('send' , 'hello')
+              }
+            }
+          }
+        }
+       })
+    </script>
+    </body>
+</html>

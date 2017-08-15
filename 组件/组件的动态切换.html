@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <a href="#" @click='cname="con"'>登入</a>
+        <a href="#" @click='cname="coo"'>注册</a>
+        <component :is='cname'></component>
+    </div>
+
+    <script src="vue221.js"></script>
+    <script>
+        Vue.component('con', {
+            template: '<div>登入</div>'
+        });
+        Vue.component('coo', {
+            template: '<div>注册</div>'
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                cname: 'con'
+            }
+        })
+    </script>
+</body>
+
+</html>

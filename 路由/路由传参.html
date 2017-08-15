@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div id="app">
+      <input type="text" v-model='firstname'>
+      <input type="text" v-model='lastername'>
+      {{fullname}}
+    </div>
+    
+    <script src="vue221.js"></script>
+    <script src="vue-router231.js"></script>
+    <script>
+      new Vue({
+        el:'#app',
+        data: {
+          firstname: '斯巴达',
+          lastername: "007"
+        },
+        computed: {
+           fullname: function(){
+            return this.firstname + this.lastername;
+           }
+        }
+      })
+    </script>
+    </body>
+</html>

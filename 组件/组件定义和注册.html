@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="vue221.js"></script>
+    </head>
+    <body>
+        <template id="account">
+          {{msg}}
+          <a href="javascript:void(0)" @click="login">注册</a>
+        </template>
+       <div id="app">
+         <!-- //使用组件 -->
+         <logins></logins>
+         <reg></reg>
+         <account></account>
+       </div>
+    <script>
+       //写法1.0
+       //定义组件
+       var login = Vue.extend({
+        template:'<h1>登入页面</h1>'
+       });
+       //注册组件  创建组件名 ， 定义的组件名
+       Vue.component('logins',login);
+       //写法2.0
+       Vue.component('reg',{
+        template:'<h1>注册页面</h1>'
+       });
+       //写法3.0
+       Vue.component('account' , {
+        template: '#account',
+        //当前组件有data别的也可能有，所以用方法包裹来返回对象使用，就可以甄别这
+        data:function(){
+          return {
+            msg:'账户组件'
+          }
+        },
+        methods: {
+           login:function(){
+            alert('login');
+           }
+        }
+       })
+       new Vue({
+        el: '#app'
+       })
+    </script>
+    </body>
+</html>

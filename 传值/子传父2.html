@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <template id="son">
+        <div><button @click="send">点击</button></div>
+    </template>
+    <template id="father">
+        <div><son v-on:send="getdata"></son></div>
+    </template>
+    <div id="app">
+        <father></father>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+        Vue.component('father',{
+            template:'#father',
+            methods:{
+                getdata:function(input){
+                    alert(input)
+                }
+            },
+            components:{
+                'son':{
+                    template:'#son',
+                    methods:{
+                        send:function(){
+                        //发送key，value
+                        this.$emit('send','hello')
+                        }
+                    }
+                }
+            }
+        })
+        new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>

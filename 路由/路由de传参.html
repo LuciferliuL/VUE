@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue221.js"></script>
+    <script src="vue-router231.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login/rose">登入</router-link>
+        <router-link to="/register/ivan">注册</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        //根路由
+        var rou = Vue.extend({});
+        //组件1，2
+        var login = Vue.extend({
+            //传值方法1
+            template:'<div>登入组件{{this.$route.params.name}}</div>'
+        });
+        var register = Vue.extend({
+            //传值方法2
+            template:'<div>注册组件{{val}}</div>',
+            data:function(){
+                return {val:'' };
+            },
+            created:function(){
+                this.val = this.$route.params.name;
+            }
+        })
+        //创建路由
+        var router = new VueRouter({
+            routes:[
+                {path:'/login/:name',component:login},
+                {path:'/register/:name',component:register}
+            ]
+        })
+        new Vue({
+            el:'#app',
+            router
+        })
+    </script>
+</body>
+</html>

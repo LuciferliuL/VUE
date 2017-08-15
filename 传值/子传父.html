@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <template id="msg">
+        <div>
+            <button @click='send'>点击</button>
+        </div>
+    </template>
+    <div id="app">
+        <msg v-on:send='getmsg'></msg>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            methods:{
+                getmsg:function(input){
+                    alert(input);
+                }
+            },
+            components:{
+                'msg':{
+                    template:'#msg',
+                    methods:{
+                        send:function(){
+                        this.$emit('send','hello')
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

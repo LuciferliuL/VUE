@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <div id="app">
+        <con>   </con>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+        Vue.component('con', {
+            template: '<div>登入页面<ccon></ccon></div>',
+            components: {
+                'ccon': {
+                    template: '<h1>注册页面</h1>'
+                }
+            }
+        })
+        new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+
+</html>

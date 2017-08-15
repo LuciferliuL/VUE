@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <div id="app">
+      <router-link to='/app/login'>登入</router-link>
+      <router-link to='/app/register'>注册</router-link>
+      <router-view></router-view>
+    </div>
+    <script src="vue221.js"></script>
+    <script src="vue-router231.js"></script>
+    <script>
+    // 根组件
+       var app = Vue.extend({
+        template: '<div><div>第一层</div><router-view></router-view></div>'
+       });
+       // 需要跳转的2个组件
+       var login = Vue.extend({
+        template: '<div>登入</div>'
+       })
+       var register = Vue.extend({
+        template: "<div>注册</div>"
+       })
+       var router = new VueRouter({
+        routes: [
+        {
+          path: '/app',
+          component: app,
+          children: [
+             {
+             path: 'login',
+             component: login
+            },
+            {
+             path: 'register',
+             component: register
+            }
+          ]
+        }   
+        ]
+       })
+       new Vue({
+        el: '#app',
+        router: router
+       })
+    </script>
+    </body>
+</html>

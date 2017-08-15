@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model='msgs'>
+        <ibn v-bind:msga='msgs'></ibn>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+        //根组件
+        new Vue({
+            el: '#app',
+            data: {
+                msgs: 'msg'
+            },
+            //创建全局子组件
+            components: {
+                'ibn': {
+                    props: ['msga'],//接收参数
+                    template: '<div>{{msga}}</div>'//模板
+                }
+            }
+        })
+    </script>
+</body>
+</html>

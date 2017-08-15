@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    <script src="vue221.js"></script>
+    <template id="account">
+    <!-- 在2.0中，组件component里面的tamplate只能有一个，所以需要一个div来包裹起来 -->
+      <div>
+        <a href="#" @click="change('reg')">登入</a>
+        <a href="#" @clikc="change('con')">注册</a> 
+        <reg></reg> 
+        <con></con>
+      </div>
+    </template>
+
+    <!-- 3. 创建组件实例 -->
+    <template id="con">
+      <h1>这是子组件</h1>
+    </template>
+
+    <template id="reg">
+      <h2>子组件2</h2>
+    </template>
+
+    <div id="app">
+    <account :is='cname'></account>
+    </div>
+
+    <script>
+    //1. 定义逐渐
+       Vue.component('account' , {
+        //2. 注册组件
+        template: '#account' ,
+        components:{
+          'reg' : {
+          template: '#reg'
+        },
+          'con' : {
+          template: '#con'
+        }} 
+       },)
+      
+       //组件是个VUE实例
+       new Vue({
+        el: '#app' ,
+        data: {
+          cname: 'reg'
+        },
+        method: {
+          change: function(arg){
+               this.cname = arg;
+          }
+        }
+       })
+    </script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <template id="reg">
+        <div>
+        <h3>组件切换</h3>
+        <a href="#" @click="chname='coo'">登入</a>
+        <a href="#" @click="chname='con'">注册</a>
+        <component :is="chname"></component>
+        </div>
+    </template>
+    <div id="app">
+        <reg></reg>
+    </div>
+    <script src="vue221.js"></script>
+    <script>
+        Vue.component('reg' , {
+            template:'#reg',
+            components:{
+                'con':{
+                    template:'<div>注册</div>'
+                },
+                'coo':{
+                    template:'<div>登入</div>'
+                }
+            },
+            data:function(){
+                return {chname:'coo'}
+            }
+        })
+        new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>
