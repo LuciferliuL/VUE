@@ -41,7 +41,12 @@
         })
         new Vue({
             el:'#app',
-            router
+            router,
+            watch:{
+                '$router':function(newroute,oldroute){
+                    //根据路由名的不同,可以执行不同的方法
+                }
+            }
         })
     </script>
 </body>

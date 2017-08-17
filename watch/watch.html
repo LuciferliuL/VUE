@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstname">
+        <input type="text" v-model="middlename">
+        {{fullname}}
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                firstname:'cat',
+                middlename:'jerry',
+                fullname:'cat,jerry'
+            },
+            watch:{
+                //监控对象:回调函数(改变后,改变前)---默认this出来的是newval
+                'firstname':function(newval , oldval){
+                    console.log(this.firstname , oldval)
+                    this.fullname = this.firstname +','+ this.middlename ;
+                },
+                'middlename':function(newval , oldval){
+                    this.fullname = this.firestname +','+ this.middlename ;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
