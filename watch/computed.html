@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" name="" value="" v-model="firstname">
+        <input type="text" name="" value="" v-model="lastname">
+        {{middlename}}
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+             firstname:'tom',
+             lastname:'jerry',
+            },
+            computed:{
+                //在这里就创建了middlename  就不用在data里面再次创建因为这个函数有return
+                middlename:function(){
+                    return this.firstname + this.lastname;
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>
