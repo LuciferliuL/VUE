@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<template id="account">
+	<div>
+		<a href="javascript:void(0)" @click='click'>点击</a>
+		<a href="javascript:void(0)">点击2</a>
+	</div>
+</template>
+<div id="app">
+	<account></account>
+</div>
+<script src="vue221.js"></script>
+<script>
+//	function o(){
+//	    var num = 123;
+//	    return {
+//	        getN : function () {
+//		        return num;
+//            },
+//		    setN : function (num2) {
+//			    num =  num2;
+//            }
+//	    }
+//	}
+//    var a = o();
+//    console.log(a.getN());
+//    a.setN(345);
+//    console.log(a.getN());
+//
+//    var arr = [1,2,3,4,1,1,3,4,5,6,8,4,5,6,7];
+//    var Arr = [];
+//    arr.sort();
+//    for (var i = 0 ; i < arr.length ; i ++){
+//        if (arr[i]!=arr[i + 1]){
+//            Arr.push(arr[i]);
+//        }
+//    }
+//    console.log(Arr);
+Vue.component ('account' , {
+    template:"#account",
+	methods:{
+        click:function(){
+            alert(1)
+        }
+	}
+});
+new Vue({
+	el:"#app"
+})
+ 
+	var arr = [1,2,3,2,3];
+console.log(Array.from(new Set(arr)));
+
+//var runTime = null;
+//var stopTime = null;
+//runTime = setInterval(function(){
+//    console.log("A")
+//},1000);
+//stopTime = setTimeout(function () {
+//    clearTimeout(runTime);
+//},4000)
+	
+	var a = /^1[0-9]{10}$/
+	
+	var f1 = function (n) {
+		function f2() {
+            console.log(n);
+        }
+        add = function () {
+	        n += 1
+        }
+        return f2
+    }
+    var result = f1(88)
+	
+
+</script>
+</body>
+</html>

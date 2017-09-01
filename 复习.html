@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		.classA{
+			font-size: 50px;
+		}
+	</style>
+	<script src="vue221.js"></script>
+	<script src="vue-resource121.js"></script>
+	<script src="vue-router231.js"></script>
+</head>
+<body>
+
+<div id="app">
+	<h1 v-if="isShow" v-bind:class="{classA}">YES</h1>
+	<h1 v-else>NO</h1>
+	<span v-for="item in items">
+		{{item.text}}
+	</span>
+	<div><a v-bind:href="baidu">百度</a></div>
+	<button @click.stop.prevent="doThis">点击跳转</button>
+	<button @click="add">添加品牌</button>
+	<input type="text" v-model="addid">
+	<input type="text" v-model="addname">
+	<table>
+		<tr>
+			<th>编号</th>
+			<th>名称</th>
+			<th>时间</th>
+			<th>操作</th>
+		</tr>
+		<tr v-for="item in list" :key="item.id">
+			<td>{{item.id}}</td>
+			<td>{{item.name}}</td>
+			<td>{{item.time}}</td>
+			<td>
+				<a href="javascript:void(0)" @click="del(item.id)">删除</a>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+		    isShow:true,
+			items:[{"text":1},{"text":2}],
+			classA:true,
+			baidu:"http://www.baidu.com",
+			list:[
+			    {id:1 , name:'宝马' , time:new Date()},
+				{id:2 , name:'奔驰' , time:new Date()}
+			],
+			addid:0,
+			addname:''
+		},
+		methods:{
+		    doThis:function () {
+			    this.isShow = !this.isShow;
+            },
+			add:function () {
+				var pobj = {id:this.addid,name:this.addname,time:new Date()};
+					this.list.push(pobj);
+					this.addid = 0;
+					this.addname = "";
+            },
+			del:function (id) {
+		        //index用来判断id是多少
+				var index = this.list.findIndex(function (obj) {
+				    //传如的id等于obj对象里面的id就返回
+					return obj.id == id ;
+                });
+				//再list里面删除对应的id
+				this.list.splice(index , 1);
+            }
+		}
+	})
+</script>
+</body>
+</html>
