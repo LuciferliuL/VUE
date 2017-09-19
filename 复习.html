@@ -7,6 +7,12 @@
 		.classA{
 			font-size: 50px;
 		}
+		.fade-enter-active, .fade-leave-active{
+			transition: opacity .5s
+		}
+		.fade-enter, .fade-leave-to{
+			opacity: 0
+		}
 	</style>
 	<script src="vue221.js"></script>
 	<script src="vue-resource121.js"></script>
@@ -15,7 +21,7 @@
 <body>
 
 <div id="app">
-	<h1 v-if="isShow" v-bind:class="{classA}">YES</h1>
+	<h1 v-if="isShow" v-bind:class="{classA}" :title="message">YES</h1>
 	<h1 v-else>NO</h1>
 	<span v-for="item in items">
 		{{item.text}}
@@ -24,7 +30,8 @@
 	<button @click.stop.prevent="doThis">点击跳转</button>
 	<button @click="add">添加品牌</button>
 	<input type="text" v-model="addid">
-	<input type="text" v-model="addname">
+	<!--再获取焦点focus的情况下  使用keydown.enter实现键入效果-->
+	<input type="text" v-model="addname"  @keydown.enter="add" v-boy>
 	<table>
 		<tr>
 			<th>编号</th>
@@ -41,9 +48,36 @@
 			</td>
 		</tr>
 	</table>
+	<div>
+		{{msg}}
+		<input type="text" v-model="msg">
+	</div>
+	<father>
+	</father>
+	{{ctime|time('-')}}
+	
+	<button v-on:click="show = !show">toggle</button>
+	<transition name="fade">
+		<p v-if="show">hello</p>
+	</transition>
+	
 </div>
 
 <script>
+	Vue.component('father' , {
+	    template:'<div>负组件<son></son></div>',
+		component:{
+	        'son':{
+	            template:'<span>子组件</span>'
+	        }
+		}
+	})
+	//<!--自定义-->
+	Vue.directive('boy' , {
+	    inserted:function (el) {
+		    el.focus()
+        }
+	})
 	new Vue({
 		el:"#app",
 		data:{
@@ -56,7 +90,11 @@
 				{id:2 , name:'奔驰' , time:new Date()}
 			],
 			addid:0,
-			addname:''
+			addname:'',
+			message:"悬停查时间" + new Date().toLocaleString(),
+			msg:'操作',
+			ctime:new Date(),
+			show:true
 		},
 		methods:{
 		    doThis:function () {
@@ -67,6 +105,19 @@
 					this.list.push(pobj);
 					this.addid = 0;
 					this.addname = "";
+					
+					//get请求==this.$http.get(url).them(callback,err)
+					this.$http.get('url').then(response => {
+					    response.text;
+					});
+					//post请求==this.$http.post(url , head , emulateJSON:true).then(callback , err)
+					this.$http.post('url' , {name:this.addname} ,{emulateJSON:true}).then(response => {
+				    response.text;
+				});
+					//jsonp请求==this.$http.jsonp(url).then(callback , err)
+					this.$http.jsonp('url').then(response => {
+				    response.text;
+				})
             },
 			del:function (id) {
 		        //index用来判断id是多少
@@ -76,8 +127,18 @@
                 });
 				//再list里面删除对应的id
 				this.list.splice(index , 1);
+            },
+		},
+		filters:{
+		    time:function (input,char) {
+                var date = new Date(input)
+			    var year = date.getFullYear()
+			    var m = date.getMonth()
+			    var fmt = year + char + m
+			    return fmt
             }
-		}
+		},
+		
 	})
 </script>
 </body>

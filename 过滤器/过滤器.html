@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue221.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{time | datafmt}}
+    </div>
+
+    <div id="app1">
+        {{time | datafmt}}
+    </div>
+</body>
+<script>
+    //全局过滤器
+    Vue.filter("datafmt" , function(input){
+        var res = "";
+        var year = input.getFullYear();
+        var month = input.getMonth();
+        var day = input.getDate();
+
+        res = year + '-' + month + '-' + day;
+        return res;
+    })
+
+    new Vue({
+        el:"#app",
+        data:{
+            time:new Date()
+        }
+        //局部过滤器
+        // filters:{
+        //     datafmt:function(input){
+        //         var res = "";
+        //         var year = input.getFullYear();
+        //         var month = input.getMonth();
+        //         var day = input.getDate();
+
+        //         res = year + '-' + month + '-' + day;
+        //         return res;
+        //     }
+        // }
+    })
+
+    new Vue({
+        el:"#app1",
+        data:{
+            time: new Date()
+        }
+    })
+</script>
+</html>
