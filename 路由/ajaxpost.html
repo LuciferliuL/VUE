@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue221.js"></script>
+    <script src="../vue-resource121.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="postdata">post请求</button>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        methods:{
+            postdata:function(){
+                var url = "http://v.juhe.cn/weather/index?cityname=%E8%8B%8F%E5%B7%9E&key=a6e10cf6427f1d11cbafd7e871fca007"
+                this.$http.post(url , {name : '123'} ,{emulateJSON:true} ).then(function(response){
+                    console.log(Response.body)
+                })
+            }
+        }
+    })
+</script>
+</html>
